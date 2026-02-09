@@ -1,102 +1,113 @@
-<!-- <!DOCTYPE html>
-<html dir="rtl">
-<head>
-    <meta charset="UTF-8">
-    <title>إرسال بيانات للجدول</title>
-    <style>
-        body { font-family: Arial, sans-serif; margin: 20px; text-align: right; }
-        input { display: block; width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; }
-        button { background-color: #4CAF50; color: white; padding: 10px 20px; border: none; cursor: pointer; width: 100%; }
-        button:hover { background-color: #45a049; }
-    </style>
-</head>
-<body>
-
-    <h2>نموذج إدخال البيانات</h2>
-    <form id="dataForm">
-        <input type="text" name="name" placeholder="الاسم بالكامل" required>
-        <input type="text" name="id" placeholder="رقم الهوية / ID" required>
-        <input type="email" name="email" placeholder="البريد الإلكتروني" required>
-        <input type="tel" name="mobile" placeholder="رقم الموبايل" required>
-        <button type="submit" id="submitBtn">إرسال البيانات</button>
-    </form>
-
-    <script>
-        const scriptURL = "https://script.google.com/macros/s/AKfycbwTDicGr0Wlv3UmXGiuZIEgonCRQAVC0apAIAYIeh2Ilsq7yOXVbQtRekcNa4GaWtA/exec";
-        const form = document.getElementById('dataForm');
-
-        form.addEventListener('submit', e => {
-            e.preventDefault();
-            document.getElementById('submitBtn').innerText = "جاري الإرسال...";
-            
-            // تحويل بيانات النموذج إلى صيغة تفهمها الـ API
-            fetch(scriptURL, { 
-                method: 'POST', 
-                body: new FormData(form)
-            })
-            .then(response => {
-                alert("تم إرسال البيانات بنجاح يا محمد!");
-                form.reset();
-                document.getElementById('submitBtn').innerText = "إرسال البيانات";
-            })
-            .catch(error => {
-                console.error('Error!', error.message);
-                alert("حدث خطأ أثناء الإرسال");
-            });
-        });
-    </script>
-</body>
-</html> -->
-
 <!DOCTYPE html>
 <html dir="rtl">
+
 <head>
     <meta charset="UTF-8">
     <title>إرسال وعرض بيانات الجدول</title>
     <style>
-        body { font-family: Arial, sans-serif; margin: 20px; text-align: right; background-color: #f9f9f9; }
-        .container { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
-        input { display: block; width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; }
-        button { background-color: #4CAF50; color: white; padding: 10px 20px; border: none; cursor: pointer; width: 100%; border-radius: 4px; font-size: 16px; }
-        button:hover { background-color: #45a049; }
-        
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            text-align: right;
+            background-color: #f9f9f9;
+        }
+
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        input {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        form {
+            width: 80%;
+            margin: auto;
+        }
+
         /* تنسيق الجدول */
-        table { width: 100%; margin-top: 30px; border-collapse: collapse; }
-        th, td { border: 1px solid #ddd; padding: 12px; text-align: center; }
-        th { background-color: #007bff; color: white; }
-        tr:nth-child(even) { background-color: #f2f2f2; }
-        .loader { color: #007bff; font-weight: bold; }
+        table {
+            width: 100%;
+            margin-top: 30px;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #007bff;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        .loader {
+            color: #007bff;
+            font-weight: bold;
+        }
     </style>
 </head>
+
 <body>
 
-<div class="container">
-    <h2>نموذج إدخال البيانات</h2>
-    <form id="dataForm">
-        <input type="text" name="name" placeholder="الاسم بالكامل" required>
-        <input type="text" name="id" placeholder="رقم الهوية / ID" required>
-        <input type="email" name="email" placeholder="البريد الإلكتروني" required>
-        <input type="tel" name="mobile" placeholder="رقم الموبايل" required>
-        <button type="submit" id="submitBtn">إرسال البيانات</button>
-    </form>
+    <div class="container">
+        <h2>نموذج إدخال البيانات</h2>
+        <form id="dataForm">
+            <input type="text" name="name" placeholder="الاسم بالكامل" required>
+            <input type="text" name="id" placeholder="رقم الهوية / ID" required>
+            <input type="email" name="email" placeholder="البريد الإلكتروني" required>
+            <input type="text" name="mobile" placeholder="رقم الموبايل" required>
+            <button type="submit" id="submitBtn">إرسال البيانات</button>
+        </form>
 
-    <hr>
+        <hr>
 
-    <h3>البيانات الموجودة في الشيت:</h3>
-    <table id="dataTable">
-        <thead>
-            <tr>
-                <th>الاسم</th>
-                <th>ID</th>
-                <th>الإيميل</th>
-                <th>الموبايل</th>
-                <th>التاريخ</th>
-            </tr>
-        </thead>
-        <tbody>
+        <h3>البيانات الموجودة في الشيت:</h3>
+        <table id="dataTable">
+            <thead>
+                <tr>
+                    <th>الاسم</th>
+                    <th>ID</th>
+                    <th>الإيميل</th>
+                    <th>الموبايل</th>
+                    <th>التاريخ</th>
+                </tr>
+            </thead>
+            <tbody>
             </tbody>
-    </table>
-</div>
+        </table>
+    </div>
 
     <script>
         const scriptURL = "https://script.google.com/macros/s/AKfycbwTDicGr0Wlv3UmXGiuZIEgonCRQAVC0apAIAYIeh2Ilsq7yOXVbQtRekcNa4GaWtA/exec";
@@ -106,7 +117,7 @@
         // --- 1. دالة جلب وعرض البيانات من الشيت ---
         function loadData() {
             tbody.innerHTML = "<tr><td colspan='5' class='loader'>جاري تحديث البيانات...</td></tr>";
-            
+
             fetch(scriptURL)
                 .then(res => res.json())
                 .then(data => {
@@ -139,25 +150,26 @@
             document.getElementById('submitBtn').innerText = "جاري الإرسال وتحديث القائمة...";
             document.getElementById('submitBtn').disabled = true;
 
-            fetch(scriptURL, { 
-                method: 'POST', 
+            fetch(scriptURL, {
+                method: 'POST',
                 body: new FormData(form)
             })
-            .then(response => {
-                alert("تم إرسال البيانات بنجاح يا محمد!");
-                form.reset();
-                document.getElementById('submitBtn').innerText = "إرسال البيانات";
-                document.getElementById('submitBtn').disabled = false;
-                
-                // --- الخطوة المطلوبة: تحديث الجدول فوراً بعد النجاح ---
-                loadData(); 
-            })
-            .catch(error => {
-                console.error('Error!', error.message);
-                alert("حدث خطأ أثناء الإرسال");
-                document.getElementById('submitBtn').disabled = false;
-            });
+                .then(response => {
+                    alert("تم إرسال البيانات بنجاح يا محمد!");
+                    form.reset();
+                    document.getElementById('submitBtn').innerText = "إرسال البيانات";
+                    document.getElementById('submitBtn').disabled = false;
+
+                    // --- الخطوة المطلوبة: تحديث الجدول فوراً بعد النجاح ---
+                    loadData();
+                })
+                .catch(error => {
+                    console.error('Error!', error.message);
+                    alert("حدث خطأ أثناء الإرسال");
+                    document.getElementById('submitBtn').disabled = false;
+                });
         });
     </script>
 </body>
+
 </html>
