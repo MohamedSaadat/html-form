@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>إرسال بيانات للجدول</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; text-align: right; }
+        input { display: block; width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; }
+        button { background-color: #4CAF50; color: white; padding: 10px 20px; border: none; cursor: pointer; width: 100%; }
+        button:hover { background-color: #45a049; }
+    </style>
+</head>
+<body>
+
+    <h2>نموذج إدخال البيانات</h2>
+    <form id="dataForm">
+        <input type="text" name="name" placeholder="الاسم بالكامل" required>
+        <input type="text" name="id" placeholder="رقم الهوية / ID" required>
+        <input type="email" name="email" placeholder="البريد الإلكتروني" required>
+        <input type="tel" name="mobile" placeholder="رقم الموبايل" required>
+        <button type="submit" id="submitBtn">إرسال البيانات</button>
+    </form>
+
+    <script>
+        const scriptURL = "https://script.google.com/macros/s/AKfycbwTDicGr0Wlv3UmXGiuZIEgonCRQAVC0apAIAYIeh2Ilsq7yOXVbQtRekcNa4GaWtA/exec";
+        const form = document.getElementById('dataForm');
+
+        form.addEventListener('submit', e => {
+            e.preventDefault();
+            document.getElementById('submitBtn').innerText = "جاري الإرسال...";
+            
+            // تحويل بيانات النموذج إلى صيغة تفهمها الـ API
+            fetch(scriptURL, { 
+                method: 'POST', 
+                body: new FormData(form)
+            })
+            .then(response => {
+                alert("تم إرسال البيانات بنجاح يا محمد!");
+                form.reset();
+                document.getElementById('submitBtn').innerText = "إرسال البيانات";
+            })
+            .catch(error => {
+                console.error('Error!', error.message);
+                alert("حدث خطأ أثناء الإرسال");
+            });
+        });
+    </script>
+</body>
+</html>
